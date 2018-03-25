@@ -24,6 +24,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuItemSair = new javax.swing.JMenuItem();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItemPesquisarProcesso = new javax.swing.JMenuItem();
         jMenuAjuda = new javax.swing.JMenu();
         jMenuItemSobre = new javax.swing.JMenuItem();
 
@@ -54,6 +55,14 @@ public class JFramePrincipal extends javax.swing.JFrame {
             }
         });
         jMenuCadastro.add(jMenuItem1);
+
+        jMenuItemPesquisarProcesso.setText("Pesquisar Processo");
+        jMenuItemPesquisarProcesso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPesquisarProcessoActionPerformed(evt);
+            }
+        });
+        jMenuCadastro.add(jMenuItemPesquisarProcesso);
 
         jMenuBarPrincipal.add(jMenuCadastro);
 
@@ -99,11 +108,18 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItemPesquisarProcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesquisarProcessoActionPerformed
+        // TODO add your handling code here:
+        JDialogPesquisarProcesso processoDialog = new JDialogPesquisarProcesso(new javax.swing.JFrame(),true);
+        processoDialog.setVisible(true);
+    }//GEN-LAST:event_jMenuItemPesquisarProcessoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenuAjuda;
     private javax.swing.JMenuBar jMenuBarPrincipal;
     private javax.swing.JMenu jMenuCadastro;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItemPesquisarProcesso;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemSobre;
     private javax.swing.JMenu jMenuSistema;
