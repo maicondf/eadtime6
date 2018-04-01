@@ -1,13 +1,66 @@
 
 package br.iesb.meuprograma.apresentacao;
 
+import javax.swing.JInternalFrame;
+
 public class JFramePrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form JFramePrincipal
      */
+    
+    static JInternalFrameCadastroUnidade objTelaCadastroUnidade;
+    static JInternalFrameListarUnidade objTelaListarUnidade;
+    
     public JFramePrincipal() {
         initComponents();
+    }
+    
+    public static void addInternalFrame (JInternalFrame tela) {//Método para adicionar JInternalFrame na área de trabalho
+        try {
+            tela.setVisible(true);
+            jDesktopPane.add(tela);//adiciona do DescktopPane
+            //Centraliza a tela
+            int larguraDk = jDesktopPane.getWidth();
+            int alturaDK = jDesktopPane.getHeight();
+            int larguraTela = tela.getWidth();
+            int alturaTela = tela.getHeight();
+            tela.setLocation(larguraDk / 2 - larguraTela / 2, alturaDK / 2 - alturaTela / 2);
+            //seleciona a tela
+            tela.setSelected(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void getInstanciaJanela(int tela) {//verifica a instância da tela, se for null cria um novo obj e add no descktopPane se não seleciona a tela.
+
+        switch (tela) {
+            case 1:
+                if (objTelaCadastroUnidade == null){
+                    objTelaCadastroUnidade = new JInternalFrameCadastroUnidade();
+                    addInternalFrame(objTelaCadastroUnidade);
+                }else{
+                    try {
+                        objTelaCadastroUnidade.setSelected(true);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            break;
+            case 2:
+                if(objTelaListarUnidade==null){
+                    objTelaListarUnidade = new JInternalFrameListarUnidade();
+                    addInternalFrame(objTelaListarUnidade);
+                }else{
+                    try {
+                        objTelaListarUnidade.setSelected(true);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            break;
+        }
     }
 
     /**
@@ -19,6 +72,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDesktopPane = new javax.swing.JDesktopPane();
         jMenuBarPrincipal = new javax.swing.JMenuBar();
         jMenuSistema = new javax.swing.JMenu();
         jMenuItemSair = new javax.swing.JMenuItem();
@@ -29,6 +83,17 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Meu Programa");
+
+        javax.swing.GroupLayout jDesktopPaneLayout = new javax.swing.GroupLayout(jDesktopPane);
+        jDesktopPane.setLayout(jDesktopPaneLayout);
+        jDesktopPaneLayout.setHorizontalGroup(
+            jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDesktopPaneLayout.setVerticalGroup(
+            jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 276, Short.MAX_VALUE)
+        );
 
         jMenuSistema.setMnemonic('S');
         jMenuSistema.setText("Sistema");
@@ -77,11 +142,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jDesktopPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 276, Short.MAX_VALUE)
+            .addComponent(jDesktopPane)
         );
 
         pack();
@@ -100,6 +165,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private static javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JMenu jMenuAjuda;
     private javax.swing.JMenuBar jMenuBarPrincipal;
     private javax.swing.JMenu jMenuCadastro;
