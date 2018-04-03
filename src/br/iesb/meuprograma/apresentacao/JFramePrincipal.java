@@ -24,6 +24,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuItemSair = new javax.swing.JMenuItem();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItemTramitarProcesso = new javax.swing.JMenuItem();
         jMenuAjuda = new javax.swing.JMenu();
         jMenuItemSobre = new javax.swing.JMenuItem();
 
@@ -54,6 +55,14 @@ public class JFramePrincipal extends javax.swing.JFrame {
             }
         });
         jMenuCadastro.add(jMenuItem1);
+
+        jMenuItemTramitarProcesso.setText("Tramitar Processo");
+        jMenuItemTramitarProcesso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemTramitarProcessoActionPerformed(evt);
+            }
+        });
+        jMenuCadastro.add(jMenuItemTramitarProcesso);
 
         jMenuBarPrincipal.add(jMenuCadastro);
 
@@ -99,6 +108,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItemTramitarProcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTramitarProcessoActionPerformed
+        // TODO add your handling code here:
+        JDialogTramitarProcesso tramitarProcesso = new JDialogTramitarProcesso(new javax.swing.JFrame(), true);
+        tramitarProcesso.setVisible(true);
+    }//GEN-LAST:event_jMenuItemTramitarProcessoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenuAjuda;
     private javax.swing.JMenuBar jMenuBarPrincipal;
@@ -106,6 +121,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemSobre;
+    private javax.swing.JMenuItem jMenuItemTramitarProcesso;
     private javax.swing.JMenu jMenuSistema;
     // End of variables declaration//GEN-END:variables
 }
