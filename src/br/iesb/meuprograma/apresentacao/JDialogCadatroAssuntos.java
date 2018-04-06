@@ -46,6 +46,7 @@ public class JDialogCadatroAssuntos extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Assunto");
 
         jTextFieldAssunto.setText(" ");
         jTextFieldAssunto.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +91,7 @@ public class JDialogCadatroAssuntos extends javax.swing.JDialog {
 
         jLabel2.setText("Assunto:");
 
-        jLabelCadAssunto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelCadAssunto.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelCadAssunto.setText("Cadastrar Assunto");
 
         jLabel3.setText("Situação:");

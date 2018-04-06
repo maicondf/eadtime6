@@ -37,6 +37,7 @@ public class JDialogListarAssunto extends javax.swing.JDialog {
         jButtonEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Listar Assunto");
         setPreferredSize(new java.awt.Dimension(715, 500));
 
         jButtonRemover.setText("Remover");
