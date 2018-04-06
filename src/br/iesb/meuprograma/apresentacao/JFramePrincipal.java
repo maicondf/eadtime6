@@ -78,6 +78,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuItemSair = new javax.swing.JMenuItem();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuAssuntos = new javax.swing.JMenu();
+        jMenuItemCadastrarAssuntos = new javax.swing.JMenuItem();
+        jMenuItemListarAssuntos = new javax.swing.JMenuItem();
         jMenuUnidades = new javax.swing.JMenu();
         jMenuItemCadastrarUnidade = new javax.swing.JMenuItem();
         jMenuItemListarUnidades = new javax.swing.JMenuItem();
@@ -122,6 +125,26 @@ public class JFramePrincipal extends javax.swing.JFrame {
             }
         });
         jMenuCadastro.add(jMenuItem1);
+
+        jMenuAssuntos.setText("Assuntos");
+
+        jMenuItemCadastrarAssuntos.setText("Cadastrar Assuntos");
+        jMenuItemCadastrarAssuntos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastrarAssuntosActionPerformed(evt);
+            }
+        });
+        jMenuAssuntos.add(jMenuItemCadastrarAssuntos);
+
+        jMenuItemListarAssuntos.setText("Listar Assuntos");
+        jMenuItemListarAssuntos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemListarAssuntosActionPerformed(evt);
+            }
+        });
+        jMenuAssuntos.add(jMenuItemListarAssuntos);
+
+        jMenuCadastro.add(jMenuAssuntos);
 
         jMenuUnidades.setText("Unidades");
 
@@ -195,13 +218,26 @@ public class JFramePrincipal extends javax.swing.JFrame {
         getInstanciaJanela(1);
     }//GEN-LAST:event_jMenuItemCadastrarUnidadeActionPerformed
 
+    private void jMenuItemCadastrarAssuntosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastrarAssuntosActionPerformed
+        JDialogCadatroAssuntos dialogo = new JDialogCadatroAssuntos (this, true);
+        dialogo.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCadastrarAssuntosActionPerformed
+
+    private void jMenuItemListarAssuntosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListarAssuntosActionPerformed
+        JDialogListarAssunto dialogo = new JDialogListarAssunto(this,true);
+        dialogo.setVisible(true);
+    }//GEN-LAST:event_jMenuItemListarAssuntosActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JMenu jMenuAjuda;
+    private javax.swing.JMenu jMenuAssuntos;
     private javax.swing.JMenuBar jMenuBarPrincipal;
     private javax.swing.JMenu jMenuCadastro;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItemCadastrarAssuntos;
     private javax.swing.JMenuItem jMenuItemCadastrarUnidade;
+    private javax.swing.JMenuItem jMenuItemListarAssuntos;
     private javax.swing.JMenuItem jMenuItemListarUnidades;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemSobre;
