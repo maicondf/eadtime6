@@ -1,4 +1,3 @@
-
 package br.iesb.meuprograma.apresentacao;
 
 import javax.swing.JInternalFrame;
@@ -84,6 +83,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuUnidades = new javax.swing.JMenu();
         jMenuItemCadastrarUnidade = new javax.swing.JMenuItem();
         jMenuItemListarUnidades = new javax.swing.JMenuItem();
+        jMenuItemPesquisarProcesso = new javax.swing.JMenuItem();
+        jItemMenuCadatrarProcesso = new javax.swing.JMenuItem();
         jMenuAjuda = new javax.swing.JMenu();
         jMenuItemSobre = new javax.swing.JMenuItem();
 
@@ -165,6 +166,22 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuUnidades.add(jMenuItemListarUnidades);
 
         jMenuCadastro.add(jMenuUnidades);
+        
+        jMenuItemPesquisarProcesso.setText("Pesquisar Processo");
+        jMenuItemPesquisarProcesso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPesquisarProcessoActionPerformed(evt);
+            }
+        });
+        jMenuCadastro.add(jMenuItemPesquisarProcesso);
+
+        jItemMenuCadatrarProcesso.setText("Cadastrar Processo");
+        jItemMenuCadatrarProcesso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jItemMenuCadatrarProcessoActionPerformed(evt);
+            }
+        });
+        jMenuCadastro.add(jItemMenuCadatrarProcesso);
 
         jMenuBarPrincipal.add(jMenuCadastro);
 
@@ -227,6 +244,19 @@ public class JFramePrincipal extends javax.swing.JFrame {
         JDialogListarAssunto dialogo = new JDialogListarAssunto(this,true);
         dialogo.setVisible(true);
     }//GEN-LAST:event_jMenuItemListarAssuntosActionPerformed
+    
+    private void jMenuItemPesquisarProcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesquisarProcessoActionPerformed
+        // TODO add your handling code here:
+        JDialogPesquisarProcesso processoDialog = new JDialogPesquisarProcesso(new javax.swing.JFrame(),true);
+        processoDialog.setVisible(true);
+    }//GEN-LAST:event_jMenuItemPesquisarProcessoActionPerformed
+
+    private void jItemMenuCadatrarProcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jItemMenuCadatrarProcessoActionPerformed
+        // TODO add your handling code here:
+        JDialogCadastrarProcesso cadastrarProcessoDialog = new JDialogCadastrarProcesso(new javax.swing.JFrame(), true);
+        cadastrarProcessoDialog.setVisible(true);
+    }//GEN-LAST:event_jItemMenuCadatrarProcessoActionPerformed
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JDesktopPane jDesktopPane;
@@ -239,6 +269,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemCadastrarUnidade;
     private javax.swing.JMenuItem jMenuItemListarAssuntos;
     private javax.swing.JMenuItem jMenuItemListarUnidades;
+    private javax.swing.JMenuItem jItemMenuCadatrarProcesso;
+    private javax.swing.JMenuItem jMenuItemPesquisarProcesso;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemSobre;
     private javax.swing.JMenu jMenuSistema;
