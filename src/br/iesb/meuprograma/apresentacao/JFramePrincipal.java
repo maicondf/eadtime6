@@ -78,6 +78,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuItemSair = new javax.swing.JMenuItem();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuUnidades = new javax.swing.JMenu();
+        jMenuItemCadastrarUnidade = new javax.swing.JMenuItem();
+        jMenuItemListarUnidades = new javax.swing.JMenuItem();
         jMenuAjuda = new javax.swing.JMenu();
         jMenuItemSobre = new javax.swing.JMenuItem();
 
@@ -119,6 +122,26 @@ public class JFramePrincipal extends javax.swing.JFrame {
             }
         });
         jMenuCadastro.add(jMenuItem1);
+
+        jMenuUnidades.setText("Unidades");
+
+        jMenuItemCadastrarUnidade.setText("Cadastrar");
+        jMenuItemCadastrarUnidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastrarUnidadeActionPerformed(evt);
+            }
+        });
+        jMenuUnidades.add(jMenuItemCadastrarUnidade);
+
+        jMenuItemListarUnidades.setText("Listar");
+        jMenuItemListarUnidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemListarUnidadesActionPerformed(evt);
+            }
+        });
+        jMenuUnidades.add(jMenuItemListarUnidades);
+
+        jMenuCadastro.add(jMenuUnidades);
 
         jMenuBarPrincipal.add(jMenuCadastro);
 
@@ -164,14 +187,25 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItemListarUnidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListarUnidadesActionPerformed
+        getInstanciaJanela(2);
+    }//GEN-LAST:event_jMenuItemListarUnidadesActionPerformed
+
+    private void jMenuItemCadastrarUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastrarUnidadeActionPerformed
+        getInstanciaJanela(1);
+    }//GEN-LAST:event_jMenuItemCadastrarUnidadeActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JMenu jMenuAjuda;
     private javax.swing.JMenuBar jMenuBarPrincipal;
     private javax.swing.JMenu jMenuCadastro;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItemCadastrarUnidade;
+    private javax.swing.JMenuItem jMenuItemListarUnidades;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemSobre;
     private javax.swing.JMenu jMenuSistema;
+    private javax.swing.JMenu jMenuUnidades;
     // End of variables declaration//GEN-END:variables
 }
