@@ -20,9 +20,6 @@ public class JDialogCadatroAssuntos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    private void cadastrar_assunto(){
-           JOptionPane.showMessageDialog(null, "Preencha todos os campos");
-        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -163,7 +160,7 @@ public class JDialogCadatroAssuntos extends javax.swing.JDialog {
     }//GEN-LAST:event_jText_IdActionPerformed
 
     private void jButton_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_salvarActionPerformed
-        cadastrar_assunto();
+       
     }//GEN-LAST:event_jButton_salvarActionPerformed
 
     private void jButtonDesistirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesistirActionPerformed
