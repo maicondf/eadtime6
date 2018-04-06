@@ -35,7 +35,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
               </Events>
             </MenuItem>
-                        <Menu class="javax.swing.JMenu" name="jMenuAssuntos">
+            <Menu class="javax.swing.JMenu" name="jMenuAssuntos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Assuntos"/>
               </Properties>
@@ -95,6 +95,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jItemMenuCadatrarProcessoActionPerformed"/>
+                </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemTramitarProcesso">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tramitar Processo"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemTramitarProcessoActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
