@@ -7,7 +7,7 @@ package br.iesb.meuprograma.apresentacao;
 
 /**
  *
- * @author Maicon&Lourdes
+ * @author Maicon
  */
 public class JDialogListarAssunto extends javax.swing.JDialog {
 
