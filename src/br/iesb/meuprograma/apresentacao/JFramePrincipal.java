@@ -1,14 +1,67 @@
-
 package br.iesb.meuprograma.apresentacao;
+
+import javax.swing.JInternalFrame;
 
 public class JFramePrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form JFramePrincipal
      */
+    
+    static JInternalFrameCadastroUnidade objTelaCadastroUnidade;
+    static JInternalFrameListarUnidade objTelaListarUnidade;
+    
     public JFramePrincipal() {
         initComponents();
     }
+    
+    public static void addInternalFrame (JInternalFrame tela) {//Método para adicionar JInternalFrame na área de trabalho
+        try {
+            tela.setVisible(true);
+            jDesktopPane.add(tela);//adiciona do DescktopPane
+            //Centraliza a tela
+            int larguraDk = jDesktopPane.getWidth();
+            int alturaDK = jDesktopPane.getHeight();
+            int larguraTela = tela.getWidth();
+            int alturaTela = tela.getHeight();
+            tela.setLocation(larguraDk / 2 - larguraTela / 2, alturaDK / 2 - alturaTela / 2);
+            //seleciona a tela
+            tela.setSelected(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void getInstanciaJanela(int tela) {//verifica a instância da tela, se for null cria um novo obj e add no descktopPane se não seleciona a tela.
+
+        switch (tela) {
+            case 1:
+                if (objTelaCadastroUnidade == null){
+                    objTelaCadastroUnidade = new JInternalFrameCadastroUnidade();
+                    addInternalFrame(objTelaCadastroUnidade);
+                }else{
+                    try {
+                        objTelaCadastroUnidade.setSelected(true);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            break;
+            case 2:
+                if(objTelaListarUnidade==null){
+                    objTelaListarUnidade = new JInternalFrameListarUnidade();
+                    addInternalFrame(objTelaListarUnidade);
+                }else{
+                    try {
+                        objTelaListarUnidade.setSelected(true);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            break;
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -18,17 +71,37 @@ public class JFramePrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDesktopPane = new javax.swing.JDesktopPane();
         jMenuBarPrincipal = new javax.swing.JMenuBar();
         jMenuSistema = new javax.swing.JMenu();
         jMenuItemSair = new javax.swing.JMenuItem();
         jMenuCadastro = new javax.swing.JMenu();
-        jMenuCadAss = new javax.swing.JMenuItem();
-        jMenuLisAss = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuAssuntos = new javax.swing.JMenu();
+        jMenuItemCadastrarAssuntos = new javax.swing.JMenuItem();
+        jMenuItemListarAssuntos = new javax.swing.JMenuItem();
+        jMenuUnidades = new javax.swing.JMenu();
+        jMenuItemCadastrarUnidade = new javax.swing.JMenuItem();
+        jMenuItemListarUnidades = new javax.swing.JMenuItem();
+        jMenuItemPesquisarProcesso = new javax.swing.JMenuItem();
+        jItemMenuCadatrarProcesso = new javax.swing.JMenuItem();
+        jMenuItemTramitarProcesso = new javax.swing.JMenuItem();
         jMenuAjuda = new javax.swing.JMenu();
         jMenuItemSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Meu Programa");
+
+        javax.swing.GroupLayout jDesktopPaneLayout = new javax.swing.GroupLayout(jDesktopPane);
+        jDesktopPane.setLayout(jDesktopPaneLayout);
+        jDesktopPaneLayout.setHorizontalGroup(
+            jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDesktopPaneLayout.setVerticalGroup(
+            jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 276, Short.MAX_VALUE)
+        );
 
         jMenuSistema.setMnemonic('S');
         jMenuSistema.setText("Sistema");
@@ -47,21 +120,77 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuCadastro.setMnemonic('C');
         jMenuCadastro.setText("Cadastro");
 
-        jMenuCadAss.setText("Cadastrar Assunto");
-        jMenuCadAss.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem1.setText("Processos...");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuCadAssActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenuCadastro.add(jMenuCadAss);
+        jMenuCadastro.add(jMenuItem1);
 
-        jMenuLisAss.setText("Listar Assunto");
-        jMenuLisAss.addActionListener(new java.awt.event.ActionListener() {
+        jMenuAssuntos.setText("Assuntos");
+
+        jMenuItemCadastrarAssuntos.setText("Cadastrar Assuntos");
+        jMenuItemCadastrarAssuntos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuLisAssActionPerformed(evt);
+                jMenuItemCadastrarAssuntosActionPerformed(evt);
             }
         });
-        jMenuCadastro.add(jMenuLisAss);
+        jMenuAssuntos.add(jMenuItemCadastrarAssuntos);
+
+        jMenuItemListarAssuntos.setText("Listar Assuntos");
+        jMenuItemListarAssuntos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemListarAssuntosActionPerformed(evt);
+            }
+        });
+        jMenuAssuntos.add(jMenuItemListarAssuntos);
+
+        jMenuCadastro.add(jMenuAssuntos);
+
+        jMenuUnidades.setText("Unidades");
+
+        jMenuItemCadastrarUnidade.setText("Cadastrar");
+        jMenuItemCadastrarUnidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastrarUnidadeActionPerformed(evt);
+            }
+        });
+        jMenuUnidades.add(jMenuItemCadastrarUnidade);
+
+        jMenuItemListarUnidades.setText("Listar");
+        jMenuItemListarUnidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemListarUnidadesActionPerformed(evt);
+            }
+        });
+        jMenuUnidades.add(jMenuItemListarUnidades);
+
+        jMenuCadastro.add(jMenuUnidades);
+        
+        jMenuItemPesquisarProcesso.setText("Pesquisar Processo");
+        jMenuItemPesquisarProcesso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPesquisarProcessoActionPerformed(evt);
+            }
+        });
+        jMenuCadastro.add(jMenuItemPesquisarProcesso);
+
+        jItemMenuCadatrarProcesso.setText("Cadastrar Processo");
+        jItemMenuCadatrarProcesso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jItemMenuCadatrarProcessoActionPerformed(evt);
+            }
+        });
+        jMenuCadastro.add(jItemMenuCadatrarProcesso);
+        
+        jMenuItemTramitarProcesso.setText("Tramitar Processo");
+        jMenuItemTramitarProcesso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemTramitarProcessoActionPerformed(evt);
+            }
+        });
+        jMenuCadastro.add(jMenuItemTramitarProcesso);
 
         jMenuBarPrincipal.add(jMenuCadastro);
 
@@ -85,11 +214,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jDesktopPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 276, Short.MAX_VALUE)
+            .addComponent(jDesktopPane)
         );
 
         pack();
@@ -104,24 +233,62 @@ public class JFramePrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuItemSairActionPerformed
 
-    private void jMenuCadAssActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadAssActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItemListarUnidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListarUnidadesActionPerformed
+        getInstanciaJanela(2);
+    }//GEN-LAST:event_jMenuItemListarUnidadesActionPerformed
+
+    private void jMenuItemCadastrarUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastrarUnidadeActionPerformed
+        getInstanciaJanela(1);
+    }//GEN-LAST:event_jMenuItemCadastrarUnidadeActionPerformed
+
+    private void jMenuItemCadastrarAssuntosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastrarAssuntosActionPerformed
         JDialogCadatroAssuntos dialogo = new JDialogCadatroAssuntos (this, true);
         dialogo.setVisible(true);
-    }//GEN-LAST:event_jMenuCadAssActionPerformed
+    }//GEN-LAST:event_jMenuItemCadastrarAssuntosActionPerformed
 
-    private void jMenuLisAssActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuLisAssActionPerformed
+    private void jMenuItemListarAssuntosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListarAssuntosActionPerformed
         JDialogListarAssunto dialogo = new JDialogListarAssunto(this,true);
         dialogo.setVisible(true);
-    }//GEN-LAST:event_jMenuLisAssActionPerformed
+    }//GEN-LAST:event_jMenuItemListarAssuntosActionPerformed
+    
+    private void jMenuItemPesquisarProcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesquisarProcessoActionPerformed
+        // TODO add your handling code here:
+        JDialogPesquisarProcesso processoDialog = new JDialogPesquisarProcesso(new javax.swing.JFrame(),true);
+        processoDialog.setVisible(true);
+    }//GEN-LAST:event_jMenuItemPesquisarProcessoActionPerformed
+
+    private void jItemMenuCadatrarProcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jItemMenuCadatrarProcessoActionPerformed
+        // TODO add your handling code here:
+        JDialogCadastrarProcesso cadastrarProcessoDialog = new JDialogCadastrarProcesso(new javax.swing.JFrame(), true);
+        cadastrarProcessoDialog.setVisible(true);
+    }//GEN-LAST:event_jItemMenuCadatrarProcessoActionPerformed
+    
+    private void jMenuItemTramitarProcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTramitarProcessoActionPerformed
+        // TODO add your handling code here:
+        JDialogTramitarProcesso tramitarProcesso = new JDialogTramitarProcesso(new javax.swing.JFrame(), true);
+        tramitarProcesso.setVisible(true);
+    }//GEN-LAST:event_jMenuItemTramitarProcessoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private static javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JMenu jMenuAjuda;
+    private javax.swing.JMenu jMenuAssuntos;
     private javax.swing.JMenuBar jMenuBarPrincipal;
-    private javax.swing.JMenuItem jMenuCadAss;
     private javax.swing.JMenu jMenuCadastro;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItemCadastrarAssuntos;
+    private javax.swing.JMenuItem jMenuItemCadastrarUnidade;
+    private javax.swing.JMenuItem jMenuItemListarAssuntos;
+    private javax.swing.JMenuItem jMenuItemListarUnidades;
+    private javax.swing.JMenuItem jItemMenuCadatrarProcesso;
+    private javax.swing.JMenuItem jMenuItemPesquisarProcesso;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemSobre;
-    private javax.swing.JMenuItem jMenuLisAss;
+    private javax.swing.JMenuItem jMenuItemTramitarProcesso;
     private javax.swing.JMenu jMenuSistema;
+    private javax.swing.JMenu jMenuUnidades;
     // End of variables declaration//GEN-END:variables
 }
