@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
-  <NonVisualComponents>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
-          <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
-                <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                <Column editable="true" title="Title 4" type="java.lang.Object"/>
-              </Table>
-            </Property>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
-  </NonVisualComponents>
+<Form version="1.6" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="resizable" type="boolean" value="false"/>
@@ -168,7 +145,7 @@
         <Property name="text" type="java.lang.String" value="99999999999"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="numProcessoActionPerformed"/>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="numProcessoPropertyChange"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblAssunto">
@@ -186,6 +163,9 @@
         <Property name="editable" type="boolean" value="false"/>
         <Property name="text" type="java.lang.String" value="99/99/9999"/>
       </Properties>
+      <Events>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dataProcessoPropertyChange"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="comboAssunto">
       <Properties>
@@ -223,6 +203,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Adicionar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAdicionarActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
@@ -231,28 +214,19 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable2">
+        <Component class="javax.swing.JTable" name="jTableAnexos">
           <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="3" rowCount="3">
-                <Column editable="true" title="Item" type="java.lang.Object">
-                  <Data value="Item 1"/>
-                  <Data value="Item 2"/>
-                  <Data value="Item 3"/>
-                </Column>
-                <Column editable="true" title="Nome do Arquivo" type="java.lang.Object">
-                  <Data value="Arquivo 1"/>
-                  <Data value="Arquivo 2"/>
-                  <Data value="Arquivo 3"/>
-                </Column>
-                <Column editable="true" title="A&#xe7;&#xe3;o" type="java.lang.Object">
-                  <Data value="Remover"/>
-                  <Data value="Remover"/>
-                  <Data value="Remover"/>
-                </Column>
-              </Table>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" preCode="anexoTable = new br.iesb.meuprograma.apresentacao.AnexoTableModel();">
+              <Connection code="anexoTable" type="code"/>
             </Property>
+            <Property name="columnSelectionAllowed" type="boolean" value="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableAnexosMouseClicked"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private br.iesb.meuprograma.apresentacao.AnexoTableModel anexoTable;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -260,11 +234,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSalvarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonDesistir">
       <Properties>
         <Property name="text" type="java.lang.String" value="Desistir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDesistirActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -5,6 +5,11 @@
  */
 package br.iesb.meuprograma.apresentacao;
 
+import br.iesb.meuprograma.entidades.Processo;
+import br.iesb.meuprograma.negocio.NegocioException;
+import br.iesb.meuprograma.negocio.ProcessoBO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author daniboy
@@ -87,35 +92,50 @@ public class JDialogPesquisarProcesso extends javax.swing.JDialog {
         });
 
         jButtonLimpar.setText("Limpar");
-
-        jTableProcessos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "N° do Processo", "Descrição", "Data do Processo", "Situação"
+        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimparActionPerformed(evt);
             }
-        ));
+        });
+
+        processoTable = new br.iesb.meuprograma.apresentacao.ProcessoTableModel();
+        jTableProcessos.setModel(processoTable);
         jScrollPane2.setViewportView(jTableProcessos);
-        if (jTableProcessos.getColumnModel().getColumnCount() > 0) {
-            jTableProcessos.getColumnModel().getColumn(0).setHeaderValue("N° do Processo");
-            jTableProcessos.getColumnModel().getColumn(1).setHeaderValue("Descrição");
-            jTableProcessos.getColumnModel().getColumn(2).setHeaderValue("Data do Processo");
-            jTableProcessos.getColumnModel().getColumn(3).setHeaderValue("Situação");
-        }
 
         jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
 
         jButtonRemover.setText("Remover");
+        jButtonRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoverActionPerformed(evt);
+            }
+        });
 
         jButtonTramitar.setText("Tramitar");
+        jButtonTramitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTramitarActionPerformed(evt);
+            }
+        });
 
         jButtonVisualizar.setText("Visualizar");
+        jButtonVisualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVisualizarActionPerformed(evt);
+            }
+        });
 
         jButtonConcluir.setText("Concluir");
+        jButtonConcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,7 +187,7 @@ public class JDialogPesquisarProcesso extends javax.swing.JDialog {
                 .addComponent(lblPesquisarProcesso)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(numProcesso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                    .addComponent(numProcesso, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblNumProcesso)
                         .addComponent(jLabel1)
@@ -208,8 +228,65 @@ public class JDialogPesquisarProcesso extends javax.swing.JDialog {
     }//GEN-LAST:event_jComboBoxNomeUnidadeActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
-        // TODO add your handling code here:
+        
+        int num;
+        try{
+            num = Integer.valueOf(numProcesso.getText());
+        }catch(NumberFormatException e){
+            num = 0;
+        }    
+        ProcessoBO bo = new ProcessoBO();
+        try{
+            bo.consultar(num);
+        }catch(NegocioException e){
+            JOptionPane.showMessageDialog(rootPane,e.getMessage(), "Informação",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
+
+    private void jButtonConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConcluirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButtonConcluirActionPerformed
+
+    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
+        numProcesso.setText("");
+        jComboBoxNomeUnidade.setSelectedIndex(0);
+        jListSituacao.clearSelection();
+    }//GEN-LAST:event_jButtonLimparActionPerformed
+
+    private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
+        Processo processo = new Processo();
+        processo.setNumProcesso(numProcesso.getText()); 
+        ProcessoBO bo = new ProcessoBO();
+        try{
+            int confirm = JOptionPane.showConfirmDialog (null, "Gostaria de remover o processo?","Alerta",JOptionPane.YES_NO_OPTION);
+            if(confirm == JOptionPane.YES_OPTION){
+               bo.excluir(processo);
+            }
+        }catch(NegocioException e){
+            JOptionPane.showMessageDialog(rootPane,e.getMessage(), "Informação",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonRemoverActionPerformed
+
+    private void jButtonTramitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTramitarActionPerformed
+        if(numProcesso.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Processo não deve estar vazio");
+        } 
+        if(jComboBoxNomeUnidade.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(null, "Uma unidade deve ser selecionada");
+        }  
+    }//GEN-LAST:event_jButtonTramitarActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        if (jTableProcessos.getSelectedRowCount() <= 0){
+            JOptionPane.showMessageDialog(null,"Nada foi selecionado, por favor selecione algum processo para edição");
+        }
+    }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jButtonVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVisualizarActionPerformed
+        if (jTableProcessos.getSelectedRowCount() <= 0){
+            JOptionPane.showMessageDialog(null,"Nada foi selecionado, por favor selecione algum processo para para visualizar");
+        }
+    }//GEN-LAST:event_jButtonVisualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,6 +347,7 @@ public class JDialogPesquisarProcesso extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableProcessos;
+    private br.iesb.meuprograma.apresentacao.ProcessoTableModel processoTable;
     private javax.swing.JLabel lblNumProcesso;
     private javax.swing.JLabel lblPesquisarProcesso;
     private javax.swing.JLabel lblSituacao;

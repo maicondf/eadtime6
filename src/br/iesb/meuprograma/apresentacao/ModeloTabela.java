@@ -6,9 +6,7 @@
 package br.iesb.meuprograma.apresentacao;
 
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ModeloTabela extends DefaultTableModel {//Criação de um modelo de tabela próprio
 
-    private ArrayList<Object[]> linhas = new ArrayList();
+    private ArrayList<Object[]> linhas = new ArrayList<>();
     private String[] colunas;
 
     public ModeloTabela() {//contrutor vasio
@@ -33,10 +31,12 @@ public class ModeloTabela extends DefaultTableModel {//Criação de um modelo de
         return linhaSelecionada;
     }
 
+    @Override
     public int getColumnCount() {//pega numero de colunas 
         return colunas.length;
     }
     
+    @Override
     public String getColumnName(int col) {//seleciona nome da coluna especificada
         return colunas[col];
     }
