@@ -5,6 +5,18 @@
  */
 package br.iesb.meuprograma.apresentacao;
 
+import br.iesb.meuprograma.entidades.Anexo;
+import br.iesb.meuprograma.entidades.Processo;
+import br.iesb.meuprograma.negocio.NegocioException;
+import br.iesb.meuprograma.negocio.ProcessoBO;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author daniboy
@@ -28,8 +40,6 @@ public class JDialogCadastrarProcesso extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         lblNumProcesso = new javax.swing.JLabel();
         numProcesso = new javax.swing.JTextField();
@@ -43,22 +53,9 @@ public class JDialogCadastrarProcesso extends javax.swing.JDialog {
         anexo = new javax.swing.JTextField();
         jButtonAdicionar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableAnexos = new javax.swing.JTable();
         jButtonSalvar = new javax.swing.JButton();
         jButtonDesistir = new javax.swing.JButton();
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -70,9 +67,9 @@ public class JDialogCadastrarProcesso extends javax.swing.JDialog {
 
         numProcesso.setEditable(false);
         numProcesso.setText("99999999999");
-        numProcesso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numProcessoActionPerformed(evt);
+        numProcesso.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                numProcessoPropertyChange(evt);
             }
         });
 
@@ -82,6 +79,11 @@ public class JDialogCadastrarProcesso extends javax.swing.JDialog {
 
         dataProcesso.setEditable(false);
         dataProcesso.setText("99/99/9999");
+        dataProcesso.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dataProcessoPropertyChange(evt);
+            }
+        });
 
         comboAssunto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Selecione o Assunto -- ", "Assunto 1", "Assunto 2", "Assunto 3" }));
 
@@ -92,22 +94,35 @@ public class JDialogCadastrarProcesso extends javax.swing.JDialog {
         anexo.setText("Selecione um arquivo...");
 
         jButtonAdicionar.setText("Adicionar");
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Item 1", "Arquivo 1", "Remover"},
-                {"Item 2", "Arquivo 2", "Remover"},
-                {"Item 3", "Arquivo 3", "Remover"}
-            },
-            new String [] {
-                "Item", "Nome do Arquivo", "Ação"
+        jButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdicionarActionPerformed(evt);
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        });
+
+        anexoTable = new br.iesb.meuprograma.apresentacao.AnexoTableModel();
+        jTableAnexos.setModel(anexoTable);
+        jTableAnexos.setColumnSelectionAllowed(true);
+        jTableAnexos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableAnexosMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTableAnexos);
 
         jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
 
         jButtonDesistir.setText("Desistir");
+        jButtonDesistir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDesistirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -195,10 +210,91 @@ public class JDialogCadastrarProcesso extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
+        
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Anexar documentos");
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        FileNameExtensionFilter filter  = new FileNameExtensionFilter("documentos", "pdf","doc","docx","odt","xls","xlsx","ods");
+        fileChooser.setFileFilter(filter);
+        int result = fileChooser.showOpenDialog(this);
+        if(result == JFileChooser.APPROVE_OPTION){
+            File selectedFile = fileChooser.getSelectedFile();
+            if(selectedFile.length() < (10 * (1024*1024))){
+               Anexo anexos = new Anexo();
+               Random item = new Random();
+               int num = 0;
+               while (num <= 0){
+                   num = item.nextInt(899999999);
+               }
+               anexos.setId(num);
+               anexos.setNomeArquivo(selectedFile.getName());
+               anexos.setLocal(selectedFile.getPath());
+               anexoTable.addAnexo(anexos);   
+            }else{
+                JOptionPane.showMessageDialog(rootPane,"Arquivo selecionado é maior que 10 Mb. Selecione um arquivo de menor tamanho.", "Aviso",JOptionPane.WARNING_MESSAGE);
+                selectedFile = null;
+            }
+        }
+    }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
-    private void numProcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numProcessoActionPerformed
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+
+        Processo processo = new Processo();
+        processo.setNumProcesso(Integer.parseInt(numProcesso.getText()));
+        processo.setDataProcesso((dataProcesso.getText()));
+        processo.setAnexos(anexoTable.getTableData());
+        processo.setDescricao(descricao.getText());
+        String assunto = null;
+        if(comboAssunto.getSelectedIndex() != 0){
+            assunto =""+comboAssunto.getSelectedItem();
+        } 
+        processo.setAssunto(assunto);
+        ProcessoBO bo = new ProcessoBO();
+        try{
+            bo.inserir(processo);
+            JOptionPane.showMessageDialog(rootPane,"Inserido com sucesso!", "Informação",JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }catch(NegocioException e){
+            JOptionPane.showMessageDialog(rootPane,e.getMessage(), "Informação",JOptionPane.WARNING_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void dataProcessoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dataProcessoPropertyChange
         // TODO add your handling code here:
-    }//GEN-LAST:event_numProcessoActionPerformed
+        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataAtual = new Date(System.currentTimeMillis());
+        dataProcesso.setText(sd.format(dataAtual));
+    }//GEN-LAST:event_dataProcessoPropertyChange
+
+    private void numProcessoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_numProcessoPropertyChange
+        // TODO add your handling code here:
+        Random radom = new Random();
+        int num = 0;
+        while (num <= 0){
+            num = radom.nextInt(899999999);
+        }
+        numProcesso.setText(""+num);
+    }//GEN-LAST:event_numProcessoPropertyChange
+
+    private void jButtonDesistirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesistirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButtonDesistirActionPerformed
+
+    private void jTableAnexosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAnexosMouseClicked
+        // TODO add your handling code here:
+        int col = jTableAnexos.getSelectedColumn();
+        int linha = jTableAnexos.getSelectedRow();   
+        if(jTableAnexos.getValueAt(linha, col) == "Remover"){
+            int confirm = JOptionPane.showConfirmDialog (null, "Gostaria de remover o anexo?","Warning",JOptionPane.YES_NO_OPTION);
+            if(confirm == JOptionPane.YES_OPTION){
+                anexoTable.removeRow(linha);
+            }
+        }
+    }//GEN-LAST:event_jTableAnexosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -252,10 +348,9 @@ public class JDialogCadastrarProcesso extends javax.swing.JDialog {
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTableAnexos;
+    private br.iesb.meuprograma.apresentacao.AnexoTableModel anexoTable;
     private javax.swing.JLabel lblAssunto;
     private javax.swing.JLabel lblDataProcesso;
     private javax.swing.JLabel lblDescricao;

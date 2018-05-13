@@ -10,23 +10,31 @@ package br.iesb.meuprograma.entidades;
  * @author daniboy
  */
 public class Anexo {
-    
-    private Integer idAnexo;
-    private String nome;
+    private int id;
+    private String nomeArquivo;
+    private String local;
 
-    public Integer getIdAnexo() {
-        return idAnexo;
+    public int getId() {
+        return id;
     }
 
-    public void setIdAnexo(Integer idAnexo) {
-        this.idAnexo = idAnexo;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeArquivo() {
+        return nomeArquivo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeArquivo(String nomeArquivo) {
+        this.nomeArquivo = nomeArquivo;
     }
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }    
 }

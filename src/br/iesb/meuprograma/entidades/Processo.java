@@ -5,8 +5,11 @@
  */
 package br.iesb.meuprograma.entidades;
 
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -14,18 +17,36 @@ import java.util.Date;
  */
 public class Processo {
     
-    private String numProcesso;
+    private Integer id;
+    private Integer numProcesso;
     private Date dataProcesso;
-    private int idAssunto;
+    //private Assunto assunto;
+    private String Assunto;
     private String descricao;
-    private ArrayList<Anexo> arquivo;
+    private List<Anexo> anexos;
 
-    public String getNumProcesso() {
+    public List<Anexo> getAnexos() {
+        return anexos;
+    }
+
+    public void setAnexos(List<Anexo> anexos) {
+        this.anexos = anexos;
+    }
+
+    public Integer getNumProcesso() {
         return numProcesso;
     }
 
-    public void setNumProcesso(String numProcesso) {
+    public void setNumProcesso(Integer numProcesso) {
         this.numProcesso = numProcesso;
+    }
+    
+    public void setNumProcesso(String numProcesso) {
+        try{
+            this.numProcesso = Integer.valueOf(numProcesso);
+        }catch(NumberFormatException e){
+            this.numProcesso = 0;
+        }
     }
 
     public Date getDataProcesso() {
@@ -35,15 +56,16 @@ public class Processo {
     public void setDataProcesso(Date dataProcesso) {
         this.dataProcesso = dataProcesso;
     }
-
-    public int getIdAssunto() {
-        return idAssunto;
+    
+    public void setDataProcesso(String dataProcesso) {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        try{
+           this.dataProcesso = df.parse(dataProcesso);
+        }catch(ParseException e){
+            this.dataProcesso = null;
+        }
     }
-
-    public void setIdAssunto(int idAssunto) {
-        this.idAssunto = idAssunto;
-    }
-
+        
     public String getDescricao() {
         return descricao;
     }
@@ -52,11 +74,27 @@ public class Processo {
         this.descricao = descricao;
     }
 
-    public ArrayList<Anexo> getArquivo() {
-        return arquivo;
+    public String getAssunto() {
+        return Assunto;
     }
 
-    public void setArquivo(ArrayList<Anexo> arquivo) {
-        this.arquivo = arquivo;
+    public void setAssunto(String Assunto) {
+        this.Assunto = Assunto;
+    }
+
+    /*public Assunto getAssunto() {
+        return assunto;
+    }/*
+
+    /*public void setAssunto(Assunto assunto) {
+        this.assunto = assunto;
+    }*/
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
