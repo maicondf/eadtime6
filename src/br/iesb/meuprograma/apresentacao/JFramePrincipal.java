@@ -76,15 +76,15 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuSistema = new javax.swing.JMenu();
         jMenuItemSair = new javax.swing.JMenuItem();
         jMenuCadastro = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuAssuntos = new javax.swing.JMenu();
         jMenuItemCadastrarAssuntos = new javax.swing.JMenuItem();
         jMenuItemListarAssuntos = new javax.swing.JMenuItem();
         jMenuUnidades = new javax.swing.JMenu();
         jMenuItemCadastrarUnidade = new javax.swing.JMenuItem();
         jMenuItemListarUnidades = new javax.swing.JMenuItem();
-        jMenuItemPesquisarProcesso = new javax.swing.JMenuItem();
+        jMenuProcessos = new javax.swing.JMenu();
         jItemMenuCadatrarProcesso = new javax.swing.JMenuItem();
+        jMenuItemPesquisarProcesso = new javax.swing.JMenuItem();
         jMenuItemTramitarProcesso = new javax.swing.JMenuItem();
         jMenuAjuda = new javax.swing.JMenu();
         jMenuItemSobre = new javax.swing.JMenuItem();
@@ -119,14 +119,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jMenuCadastro.setMnemonic('C');
         jMenuCadastro.setText("Cadastro");
-
-        jMenuItem1.setText("Processos...");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenuCadastro.add(jMenuItem1);
 
         jMenuAssuntos.setText("Assuntos");
 
@@ -167,14 +159,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuUnidades.add(jMenuItemListarUnidades);
 
         jMenuCadastro.add(jMenuUnidades);
-        
-        jMenuItemPesquisarProcesso.setText("Pesquisar Processo");
-        jMenuItemPesquisarProcesso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemPesquisarProcessoActionPerformed(evt);
-            }
-        });
-        jMenuCadastro.add(jMenuItemPesquisarProcesso);
+
+        jMenuProcessos.setText("Processos");
 
         jItemMenuCadatrarProcesso.setText("Cadastrar Processo");
         jItemMenuCadatrarProcesso.addActionListener(new java.awt.event.ActionListener() {
@@ -182,15 +168,25 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 jItemMenuCadatrarProcessoActionPerformed(evt);
             }
         });
-        jMenuCadastro.add(jItemMenuCadatrarProcesso);
-        
+        jMenuProcessos.add(jItemMenuCadatrarProcesso);
+
+        jMenuItemPesquisarProcesso.setText("Pesquisar Processo");
+        jMenuItemPesquisarProcesso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPesquisarProcessoActionPerformed(evt);
+            }
+        });
+        jMenuProcessos.add(jMenuItemPesquisarProcesso);
+
         jMenuItemTramitarProcesso.setText("Tramitar Processo");
         jMenuItemTramitarProcesso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemTramitarProcessoActionPerformed(evt);
             }
         });
-        jMenuCadastro.add(jMenuItemTramitarProcesso);
+        jMenuProcessos.add(jMenuItemTramitarProcesso);
+
+        jMenuCadastro.add(jMenuProcessos);
 
         jMenuBarPrincipal.add(jMenuCadastro);
 
@@ -274,20 +270,20 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JDesktopPane jDesktopPane;
+    private javax.swing.JMenuItem jItemMenuCadatrarProcesso;
     private javax.swing.JMenu jMenuAjuda;
     private javax.swing.JMenu jMenuAssuntos;
     private javax.swing.JMenuBar jMenuBarPrincipal;
     private javax.swing.JMenu jMenuCadastro;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemCadastrarAssuntos;
     private javax.swing.JMenuItem jMenuItemCadastrarUnidade;
     private javax.swing.JMenuItem jMenuItemListarAssuntos;
     private javax.swing.JMenuItem jMenuItemListarUnidades;
-    private javax.swing.JMenuItem jItemMenuCadatrarProcesso;
     private javax.swing.JMenuItem jMenuItemPesquisarProcesso;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemSobre;
     private javax.swing.JMenuItem jMenuItemTramitarProcesso;
+    private javax.swing.JMenu jMenuProcessos;
     private javax.swing.JMenu jMenuSistema;
     private javax.swing.JMenu jMenuUnidades;
     // End of variables declaration//GEN-END:variables

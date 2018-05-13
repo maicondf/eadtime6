@@ -1,13 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.iesb.meuprograma.apresentacao;
+
+import br.iesb.meuprograma.entidades.ListAssunto;
+import br.iesb.meuprograma.negocio.ListAssuntoBO;
+import br.iesb.meuprograma.negocio.NegocioException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Maicon&Lourdes
+ * @author Maicon
  */
 public class JDialogListarAssunto extends javax.swing.JDialog {
 
@@ -32,7 +33,7 @@ public class JDialogListarAssunto extends javax.swing.JDialog {
         jButtonListar = new javax.swing.JButton();
         jLabelListarAssunto = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableTabela = new javax.swing.JTable();
+        jTableAssunto = new javax.swing.JTable();
         jButtonAdi = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
 
@@ -52,11 +53,13 @@ public class JDialogListarAssunto extends javax.swing.JDialog {
         jLabelListarAssunto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelListarAssunto.setText("Listar Assunto");
 
-        jTableTabela.setModel(new javax.swing.table.DefaultTableModel(
+        jTableAssunto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 { new Integer(1), "Assunto 1", "Ativo"},
                 { new Integer(2), "Assunto 2", "Ativo"},
-                { new Integer(3), "Assunto 3", "Inativo"}
+                { new Integer(3), "Assunto 3", "Inativo"},
+                { new Integer(4), "Assunto 4 ", "Inativo  "},
+                { new Integer(5), "Assunto 5", "Ativo"}
             },
             new String [] {
                 "ID", "Assunto", "Situação"
@@ -70,11 +73,11 @@ public class JDialogListarAssunto extends javax.swing.JDialog {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTableTabela);
-        if (jTableTabela.getColumnModel().getColumnCount() > 0) {
-            jTableTabela.getColumnModel().getColumn(0).setMinWidth(100);
-            jTableTabela.getColumnModel().getColumn(0).setPreferredWidth(15);
-            jTableTabela.getColumnModel().getColumn(0).setMaxWidth(100);
+        jScrollPane2.setViewportView(jTableAssunto);
+        if (jTableAssunto.getColumnModel().getColumnCount() > 0) {
+            jTableAssunto.getColumnModel().getColumn(0).setMinWidth(100);
+            jTableAssunto.getColumnModel().getColumn(0).setPreferredWidth(15);
+            jTableAssunto.getColumnModel().getColumn(0).setMaxWidth(100);
         }
 
         jButtonAdi.setText("Adicionar");
@@ -97,34 +100,36 @@ public class JDialogListarAssunto extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonAdi)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonRemover)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonListar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabelListarAssunto)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jButtonAdi)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButtonRemover)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jButtonListar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabelListarAssunto)
+                            .addGap(542, 542, 542))))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jLabelListarAssunto)
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAdi)
                     .addComponent(jButtonEditar)
                     .addComponent(jButtonRemover)
                     .addComponent(jButtonListar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(209, Short.MAX_VALUE))
         );
 
         pack();
@@ -132,15 +137,42 @@ public class JDialogListarAssunto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
-        // TODO add your handling code here:
+        int linhaSelecionada = -1;
+        linhaSelecionada = jTableAssunto.getSelectedRow();
+        if (linhaSelecionada >= 0) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "É necesário selecionar uma linha.");
+        }
+        if (jTableAssunto.getSelectedRow() != -1) {
+            int confirma = JOptionPane.showConfirmDialog(null, "A linha selecionada será excluido.", "Atenção", JOptionPane.YES_NO_OPTION);
+            if (confirma == JOptionPane.YES_OPTION) {
+                DefaultTableModel remover = (DefaultTableModel) jTableAssunto.getModel();
+                remover.removeRow(jTableAssunto.getSelectedRow());
+            }
+        }
     }//GEN-LAST:event_jButtonRemoverActionPerformed
 
     private void jButtonAdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdiActionPerformed
-        // TODO add your handling code here:
+        ListAssunto assunto = new ListAssunto();
+        ListAssuntoBO bo = new ListAssuntoBO();
+        try {
+            bo.inserir(assunto);
+            JOptionPane.showMessageDialog(rootPane, "Dados adicionados com sucesso!", "Informação", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NegocioException e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonAdiActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        // TODO add your handling code here:
+        int linhaSelecionada = -1;
+        linhaSelecionada = jTableAssunto.getSelectedRow();
+        if (linhaSelecionada >= 0) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "É necesário selecionar uma linha.");
+        }
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     /**
@@ -192,6 +224,6 @@ public class JDialogListarAssunto extends javax.swing.JDialog {
     private javax.swing.JButton jButtonRemover;
     private javax.swing.JLabel jLabelListarAssunto;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTableTabela;
+    private javax.swing.JTable jTableAssunto;
     // End of variables declaration//GEN-END:variables
 }

@@ -27,22 +27,6 @@
             <Property name="text" type="java.lang.String" value="Cadastro"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuCadAss">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Cadastrar Assunto"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuCadAssActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuLisAss">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Listar Assunto"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuLisAssActionPerformed"/>
-              </Events>
-            </MenuItem>
             <Menu class="javax.swing.JMenu" name="jMenuAssuntos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Assuntos"/>
@@ -89,30 +73,37 @@
                 </MenuItem>
               </SubComponents>
             </Menu>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemPesquisarProcesso">
+            <Menu class="javax.swing.JMenu" name="jMenuProcessos">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pesquisar Processo"/>
+                <Property name="text" type="java.lang.String" value="Processos"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemPesquisarProcessoActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jItemMenuCadatrarProcesso">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Cadastrar Processo"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jItemMenuCadatrarProcessoActionPerformed"/>
-                </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemTramitarProcesso">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Tramitar Processo"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemTramitarProcessoActionPerformed"/>
-              </Events>
-            </MenuItem>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="jItemMenuCadatrarProcesso">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Cadastrar Processo"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jItemMenuCadatrarProcessoActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemPesquisarProcesso">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Pesquisar Processo"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemPesquisarProcessoActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemTramitarProcesso">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Tramitar Processo"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemTramitarProcessoActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuAjuda">
