@@ -5,6 +5,8 @@
  */
 package br.iesb.meuprograma.apresentacao;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author daniboy
@@ -37,7 +39,7 @@ public class JDialogTramitarProcesso extends javax.swing.JDialog {
         lblAssunto = new javax.swing.JLabel();
         lblDescricao = new javax.swing.JLabel();
         lblUnidadeDestino = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxUnidade = new javax.swing.JComboBox<>();
         assunto = new javax.swing.JTextField();
         descricao = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
@@ -47,6 +49,7 @@ public class JDialogTramitarProcesso extends javax.swing.JDialog {
         btnTramitar = new javax.swing.JButton();
         btnDesistir = new javax.swing.JButton();
         idProcesso = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,7 +91,7 @@ public class JDialogTramitarProcesso extends javax.swing.JDialog {
 
         lblUnidadeDestino.setText("Unidade de Destino: ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Selecione uma Unidade -- ", "Unidade 1", "Unidade 2", "Unidade 3" }));
+        jComboBoxUnidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Selecione uma Unidade -- ", "Unidade 1", "Unidade 2", "Unidade 3" }));
 
         assunto.setEditable(false);
 
@@ -115,12 +118,24 @@ public class JDialogTramitarProcesso extends javax.swing.JDialog {
         btnTramitar.setText("Tramitar");
 
         btnDesistir.setText("Desistir");
+        btnDesistir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesistirActionPerformed(evt);
+            }
+        });
 
         idProcesso.setEditable(false);
         idProcesso.setText("9999999999");
         idProcesso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idProcessoActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Adicionar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -132,31 +147,32 @@ public class JDialogTramitarProcesso extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblTitulo)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblDescricao)
-                                    .addGap(83, 83, 83)
-                                    .addComponent(descricao, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblUnidadeDestino)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblAssunto)
-                                        .addComponent(lblID))
-                                    .addGap(94, 94, 94)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(idProcesso, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(76, 76, 76)
-                                            .addComponent(jLabel1)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(assunto, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addComponent(lblTitulo, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblDescricao)
+                                .addGap(83, 83, 83)
+                                .addComponent(descricao, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblUnidadeDestino)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxUnidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblAssunto)
+                                    .addComponent(lblID))
+                                .addGap(94, 94, 94)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(idProcesso, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(76, 76, 76)
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(assunto, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(205, 205, 205)
                         .addComponent(btnTramitar)
@@ -196,7 +212,9 @@ public class JDialogTramitarProcesso extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(lblUnidadeDestino))
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBoxUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -213,6 +231,16 @@ public class JDialogTramitarProcesso extends javax.swing.JDialog {
     private void idProcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idProcessoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idProcessoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       if(jComboBoxUnidade.getSelectedIndex() == 0){
+           JOptionPane.showMessageDialog(null, "Uma unidade deve estar selecionada para se adicionada.");
+       }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnDesistirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesistirActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnDesistirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,7 +290,8 @@ public class JDialogTramitarProcesso extends javax.swing.JDialog {
     private javax.swing.JButton btnTramitar;
     private javax.swing.JTextField descricao;
     private javax.swing.JTextField idProcesso;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBoxUnidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

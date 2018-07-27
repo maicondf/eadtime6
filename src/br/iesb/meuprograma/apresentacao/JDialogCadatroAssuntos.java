@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.iesb.meuprograma.apresentacao;
 
+import br.iesb.meuprograma.entidades.CadAssunto;
+import br.iesb.meuprograma.negocio.CadAssuntoBO;
+import br.iesb.meuprograma.negocio.NegocioException;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Maicon&Lourdes
+ * @author Maicon
  */
 public class JDialogCadatroAssuntos extends javax.swing.JDialog {
 
@@ -42,15 +41,15 @@ public class JDialogCadatroAssuntos extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Assunto");
 
-        jTextFieldAssunto.setText(" ");
+        jTextFieldAssunto.setCaretPosition(0);
         jTextFieldAssunto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldAssuntoActionPerformed(evt);
             }
         });
 
-        jText_Id.setText(" ");
         jText_Id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jText_IdActionPerformed(evt);
@@ -59,6 +58,11 @@ public class JDialogCadatroAssuntos extends javax.swing.JDialog {
 
         buttonGroup1.add(jRadioButtonAtivo);
         jRadioButtonAtivo.setText("Ativo");
+        jRadioButtonAtivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonAtivoActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRadioButtonInativo);
         jRadioButtonInativo.setText("Inativo");
@@ -86,7 +90,7 @@ public class JDialogCadatroAssuntos extends javax.swing.JDialog {
 
         jLabel2.setText("Assunto:");
 
-        jLabelCadAssunto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelCadAssunto.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelCadAssunto.setText("Cadastrar Assunto");
 
         jLabel3.setText("Situação:");
@@ -158,16 +162,42 @@ public class JDialogCadatroAssuntos extends javax.swing.JDialog {
     }//GEN-LAST:event_jText_IdActionPerformed
 
     private void jButton_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_salvarActionPerformed
-        
+        CadAssunto assunto = new CadAssunto();
+        assunto.setId(jText_Id.getText());
+        assunto.setAssunto(jTextFieldAssunto.getText());
+        //as linhas abaixo validam os campos ativo e inativo.
+        if (jRadioButtonAtivo.isSelected()) {
+            assunto.setSituacao(true);
+        }
+        if (jRadioButtonInativo.isSelected()) {
+            assunto.setSituacao(true);
+        }
+
+        CadAssuntoBO bo = new CadAssuntoBO();
+        try {
+            bo.inserir(assunto);
+            JOptionPane.showMessageDialog(rootPane, "Dados incluidos com sucesso!", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        } catch (NegocioException e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+
     }//GEN-LAST:event_jButton_salvarActionPerformed
 
     private void jButtonDesistirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesistirActionPerformed
-
+        int desistir = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja desistir do cadastro?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if (desistir == JOptionPane.YES_OPTION) {
+            dispose();
+        }
     }//GEN-LAST:event_jButtonDesistirActionPerformed
 
     private void jRadioButtonInativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonInativoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonInativoActionPerformed
+
+    private void jRadioButtonAtivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAtivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonAtivoActionPerformed
 
     /**
      * @param args the command line arguments
